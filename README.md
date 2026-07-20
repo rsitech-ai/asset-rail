@@ -17,8 +17,12 @@ wallet data.
 - Maturity: prototype. The planner is useful for inspecting deterministic route
   decisions, but it is not a live portfolio or withdrawal tool.
 - Data mode: bundled synthetic fixtures only.
-- Distribution: source and a locally built, ad-hoc-signed community app.
-- License: MPL-2.0 for source code and CC-BY-4.0 for original documentation.
+- Distribution: source, a locally built ad-hoc-signed community app, and an
+  official direct-download app only when the release assets pass Developer ID
+  signing and Apple notarization checks.
+- License: Apache-2.0 for original source code and project documentation.
+- Maintainer: [RSI Tech](https://rsitech.ai); public and confidential contact
+  [info@rsitech.ai](mailto:info@rsitech.ai).
 - Automation: CI is intentionally outside this repository's current release
   scope. All required checks are documented as local commands.
 
@@ -84,6 +88,26 @@ src-tauri/target/debug/bundle/macos/AssetRail.app
 The signature is local ad-hoc signing. It is not a Developer ID signature,
 notarization, or Mac App Store package.
 
+### Build the official direct-download app
+
+The official release builder is reserved for the clean, reviewed release commit
+and requires the installed `Developer ID Application: Rafal Sikora
+(2NY8A789TN)` identity:
+
+```bash
+npm ci
+npm run test:run
+npm run test:config
+npm run build:official
+```
+
+The command embeds the exact source commit, Apache-2.0 project terms, and
+generated runtime dependency notices; signs the bundle with hardened runtime;
+verifies its Team ID, privacy manifest, and legal resources; and rejects
+ambiguous or dirty source state. It deliberately refuses notarization
+credentials. Notarization is a separate release step in
+[docs/RELEASING.md](docs/RELEASING.md).
+
 ### Build an unofficial community app
 
 Community distributions must not inherit AssetRail's official identity:
@@ -101,7 +125,7 @@ src-tauri/target/release/bundle/macos/Rail Planner Community.app
 ```
 
 The build requires a clean Git commit, embeds the exact source revision and
-MPL-2.0 status, strips symbols, remaps build paths, rejects workstation-path
+Apache-2.0 status, strips symbols, remaps build paths, rejects workstation-path
 leakage, applies a distinct identity, and verifies the resulting ad-hoc seal.
 See [the community build guide](docs/open-source/COMMUNITY_BUILD.md) before
 distributing a modified build.
@@ -174,10 +198,11 @@ reproducible bugs and narrowly scoped feature proposals. See
 
 ## License and trademarks
 
-Source code, tests, scripts, schemas, and the community icon are available under
-the [Mozilla Public License 2.0](LICENSE). Original documentation is available
-under [CC-BY-4.0](LICENSES/CC-BY-4.0.txt). Third-party components retain their
-upstream licenses.
+Original source code, tests, scripts, schemas, the community icon, and project
+documentation in v0.1.1 and later are available under the
+[Apache License 2.0](LICENSE). Third-party components retain their upstream
+licenses. The historical v0.1.0 source and documentation remain available under
+the licenses recorded at that tag.
 
 The source licenses do not grant rights to the AssetRail or RSI Tech names,
 official logos, official application icon, bundle identity, domains, or service

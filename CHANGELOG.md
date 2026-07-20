@@ -7,6 +7,33 @@ versioning for source releases while the public interface remains experimental.
 
 No unreleased changes.
 
+## [0.1.1] - 2026-07-20
+
+### Changed
+
+- Adopted Apache-2.0 for original source code and project documentation in
+  v0.1.1 and later.
+- Recorded Rafal Sikora as copyright owner and RSI Tech as public maintainer,
+  with `https://rsitech.ai` and `info@rsitech.ai` as the canonical contacts.
+- Updated package, Cargo, Tauri, community-build, and in-app release metadata to
+  version 0.1.1 and Apache-2.0.
+- Added a fail-closed official build path for the Developer ID direct-download
+  route. It requires an exact clean source commit and the expected Team
+  `2NY8A789TN` identity, while keeping notarization credentials out of the local
+  build step.
+- Added clean-commit-bound Cargo and npm runtime dependency notices, with the
+  project license, NOTICE, copyright, and trademark terms embedded in release
+  bundles.
+- Historical `v0.1.0` license grants remain unchanged. Its release and tag are
+  retained as the accurate record of the first public source release.
+
+### Limitations
+
+- Official downloadable artifacts are published only after the exact bundle is
+  notarized, stapled, Gatekeeper-validated, and runtime-proven.
+- CI and automated security scans are intentionally outside this release scope;
+  required checks run locally.
+
 ## [0.1.0] - 2026-07-20
 
 ### Added
@@ -28,5 +55,6 @@ No unreleased changes.
 - No Developer ID-signed or notarized binary is published.
 - CI is intentionally not part of the release process.
 
-[Unreleased]: https://github.com/rsitech-ai/asset-rail/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/rsitech-ai/asset-rail/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/rsitech-ai/asset-rail/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/rsitech-ai/asset-rail/releases/tag/v0.1.0

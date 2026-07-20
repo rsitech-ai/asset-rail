@@ -1,9 +1,9 @@
 {
   "name": "assetrail",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Security-first macOS prototype for deterministic crypto withdrawal route planning with offline fixtures.",
-  "license": "MPL-2.0",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rsitech-ai/asset-rail.git"
@@ -33,9 +33,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "build:community": "node script/build_community.mjs",
+    "build:official": "node script/build_official.mjs",
     "test": "vitest",
     "test:run": "vitest run",
-    "test:config": "node --test script/security_config.node-test.mjs",
+    "test:config": "node --test script/*.node-test.mjs",
     "verify:security": "./script/verify_security_surface.sh",
     "tauri": "tauri"
   },

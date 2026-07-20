@@ -122,6 +122,13 @@ test("public documentation is licensed, operational, and free of private release
   const contributing = await read("CONTRIBUTING.md");
   const copyright = await read("COPYRIGHT");
   const notice = await read("NOTICE");
+  const license = await read("LICENSE");
+  const licenseScope = await read("LICENSES/README.md");
+  const maintainers = await read("MAINTAINERS.md");
+  const changelog = await read("CHANGELOG.md");
+  const manifest = await readJson("package.json");
+  const tauriConfig = await readJson("src-tauri/tauri.conf.json");
+  const cargoManifest = await read("src-tauri/Cargo.toml");
   const sbomGenerator = await read("script/generate_sbom.sh");
 
   assert.match(authorization, /`core:default` is forbidden/);
@@ -129,19 +136,33 @@ test("public documentation is licensed, operational, and free of private release
   assert.match(redaction, /Release checks must/);
   assert.doesNotMatch(schemas, /## Planned envelopes/);
   assert.match(schemas, /must pass secret-pattern scans before release/);
-  assert.match(readme, /License: MPL-2\.0/);
+  assert.match(readme, /License: Apache-2\.0/);
   assert.doesNotMatch(readme, /not yet licensed|must not be published/i);
-  assert.match(releasing, /source-only `0\.1\.x` GitHub release/);
+  assert.match(releasing, /Developer ID-signed direct-download release/);
   assert.match(releasing, /CI is not used as a gate/);
   assert.match(security, /GitHub Private Vulnerability Reporting/);
   assert.match(security, /info@rsitech\.ai/);
   assert.match(contributing, /Developer Certificate of Origin 1\.1/);
   assert.equal(
     copyright,
-    "Copyright 2026 RSI Tech (rsitech.ai)\n\nSee LICENSES/README.md for license scope and third-party attribution.\n",
+    "Copyright 2026 Rafal Sikora\n\nAssetRail is maintained publicly by RSI Tech.\nSee LICENSES/README.md for license scope and third-party attribution.\n",
   );
-  assert.match(notice, /Copyright 2026 RSI Tech \(rsitech\.ai\)\./);
-  assert.match(notice, /Mozilla Public License 2\.0/);
+  assert.match(notice, /Copyright 2026 Rafal Sikora\./);
+  assert.match(notice, /Apache License, Version 2\.0/);
+  assert.match(license, /^\s*Apache License\s+Version 2\.0, January 2004/m);
+  assert.match(licenseScope, /original\s+source code, tests, scripts, schemas, and project documentation/);
+  assert.equal(await exists("LICENSES/CC-BY-4.0.txt"), false);
+  assert.match(maintainers, /RSI Tech/);
+  assert.match(maintainers, /https:\/\/rsitech\.ai/);
+  assert.match(maintainers, /info@rsitech\.ai/);
+  assert.match(changelog, /## \[0\.1\.1\] - 2026-07-20/);
+  assert.match(changelog, /Historical `v0\.1\.0` license grants remain unchanged/);
+  assert.equal(manifest.version, "0.1.1");
+  assert.equal(manifest.license, "Apache-2.0");
+  assert.equal(tauriConfig.version, "0.1.1");
+  assert.match(cargoManifest, /^version = "0\.1\.1"$/m);
+  assert.match(cargoManifest, /^authors = \["RSI Tech <info@rsitech\.ai>"\]$/m);
+  assert.match(cargoManifest, /^license = "Apache-2\.0"$/m);
   assert.match(sbomGenerator, /SBOM_OUTPUT_DIR:-\$ROOT_DIR\/dist\/sbom/);
 
   for (const generatedSbom of [

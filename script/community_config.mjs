@@ -1,3 +1,5 @@
+import { releaseResourceMap } from "./third_party_notices.mjs";
+
 const officialBundleId = "ai.rsitech.assetrail";
 const bundleIdPattern = /^[A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)+$/;
 const fullRevisionPattern = /^[0-9a-f]{40}$/;
@@ -34,6 +36,7 @@ export function createCommunityConfig({ bundleId, productName }) {
         "icons/community/128x128@2x.png",
         "icons/community/icon.icns",
       ],
+      resources: releaseResourceMap,
     },
   };
 }
@@ -66,11 +69,11 @@ export function createCommunityBuildPlan({ environment, revision, dirty }) {
       ].filter(Boolean).join("\u001f"),
       CARGO_PROFILE_RELEASE_DEBUG: "false",
       CARGO_PROFILE_RELEASE_STRIP: "symbols",
-      VITE_APP_VERSION: "0.1.0",
+      VITE_APP_VERSION: "0.1.1",
       VITE_BUILD_NUMBER: revision.slice(0, 12),
       VITE_DISTRIBUTION_KIND: "community",
       VITE_PRODUCT_NAME: identity.productName,
-      VITE_SOURCE_LICENSE_ID: "MPL-2.0",
+      VITE_SOURCE_LICENSE_ID: "Apache-2.0",
       VITE_SOURCE_LICENSE_STATUS: "Open-source license adopted",
       VITE_SOURCE_REVISION: revision,
       VITE_SOURCE_URL: `${sourceRepository.replace(/\/$/, "")}/tree/${revision}`,

@@ -31,7 +31,7 @@ home-directory path marker.
 The 2026-07-20 rehearsal installed the locked graph, reported zero npm
 vulnerabilities, passed the frontend suite, built the arm64 app, passed strict
 signature verification, launched the real bundle, rendered a usable planner,
-and displayed the full source revision plus MPL-2.0 status in-app.
+and displayed the full source revision plus Apache-2.0 status in-app.
 
 Optional safe overrides:
 
@@ -46,5 +46,5 @@ The product name may not contain `AssetRail`, the bundle identifier may not be
 the official identifier, and the source repository must use HTTPS. A publicly
 distributed fork must also replace artwork, use its own Apple account and
 services, publish accurate privacy/support information, identify itself as
-unofficial, describe material changes, and comply with MPL-2.0 plus all
+unofficial, describe material changes, and comply with Apache-2.0 plus all
 applicable third-party licenses and notices.

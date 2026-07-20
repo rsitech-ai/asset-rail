@@ -1,20 +1,20 @@
-AssetRail licensing and third-party notice
+AssetRail
+Copyright 2026 Rafal Sikora.
 
-Copyright 2026 RSI Tech (rsitech.ai).
+AssetRail is maintained publicly by RSI Tech.
+Website: https://rsitech.ai
+Project and confidential contact: info@rsitech.ai
 
-AssetRail source code, tests, scripts, schemas, and the community icon are
-licensed under the Mozilla Public License 2.0 in LICENSE.
-
-Original project documentation is licensed under Creative Commons Attribution
-4.0 International in LICENSES/CC-BY-4.0.txt.
+Original source code, tests, scripts, schemas, and project documentation in
+this release are licensed under the Apache License, Version 2.0 in LICENSE.
 
 The AssetRail and RSI Tech names, official logos, official application icon,
 bundle identity, domains, accounts, and service identity are not licensed by
-those source or documentation licenses. See TRADEMARKS.md.
+the Apache License except for the limited uses stated in Section 6. See
+TRADEMARKS.md.
 
 Third-party packages identified by package-lock.json and src-tauri/Cargo.lock
 retain their upstream licenses. Machine-readable dependency inventories are
-documented under docs/open-source/sbom/. The source-only GitHub release does not
-publish a compiled macOS application. Anyone distributing a compiled build is
-responsible for including the upstream notices and corresponding source
-required by the licenses of the bundled components.
+documented under docs/open-source/sbom/. Compiled AssetRail release bundles
+include the generated THIRD_PARTY_NOTICES.txt inventory and applicable upstream
+license texts.
