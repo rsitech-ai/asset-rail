@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MappingRecord",
+  "type": "object",
+  "properties": {
+    "assetRepresentationId": {
+      "$ref": "#/$defs/AssetRepresentationId"
+    },
+    "canonicalAssetId": {
+      "$ref": "#/$defs/CanonicalAssetId"
+    },
+    "canonicalChainId": {
+      "$ref": "#/$defs/CanonicalChainId"
+    },
+    "connectorId": {
+      "$ref": "#/$defs/ConnectorId"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "providerAssetCode": {
+      "type": "string"
+    },
+    "providerNetworkCode": {
+      "type": "string"
+    },
+    "reviewedAt": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Timestamp"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "format": "uint16",
+      "maximum": 65535,
+      "minimum": 0
+    },
+    "sourceVersion": {
+      "type": "string"
+    },
+    "state": {
+      "$ref": "#/$defs/MappingState"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "connectorId",
+    "providerAssetCode",
+    "providerNetworkCode",
+    "canonicalAssetId",
+    "canonicalChainId",
+    "assetRepresentationId",
+    "state",
+    "sourceVersion"
+  ],
+  "$defs": {
+    "AssetRepresentationId": {
+      "type": "string",
+      "maxLength": 181,
+      "minLength": 11,
+      "pattern": "^[-a-z0-9]{3,8}:[-_a-zA-Z0-9]{1,32}/[-a-z0-9]{3,8}:[-_.%a-zA-Z0-9]{1,128}$"
+    },
+    "CanonicalAssetId": {
+      "type": "string",
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9](?:[a-z0-9._-]*[a-z0-9])?$"
+    },
+    "CanonicalChainId": {
+      "type": "string",
+      "maxLength": 41,
+      "minLength": 5,
+      "pattern": "^[-a-z0-9]{3,8}:[-_a-zA-Z0-9]{1,32}$"
+    },
+    "ConnectorId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+    },
+    "MappingState": {
+      "type": "string",
+      "enum": [
+        "APPROVED",
+        "PENDING_REVIEW",
+        "REJECTED"
+      ]
+    },
+    "Timestamp": {
+      "type": "string",
+      "maxLength": 35,
+      "minLength": 20,
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$"
+    }
+  }
+}

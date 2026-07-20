@@ -1,0 +1,60 @@
+{
+  "name": "assetrail",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Security-first macOS prototype for deterministic crypto withdrawal route planning with offline fixtures.",
+  "license": "MPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rsitech-ai/asset-rail.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rsitech-ai/asset-rail/issues"
+  },
+  "packageManager": "npm@11.6.2",
+  "engines": {
+    "node": ">=24.10.0 <25",
+    "npm": "11.6.2"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.10.0",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "npm",
+      "version": "11.6.2",
+      "onFail": "error"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "build:community": "node script/build_community.mjs",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:config": "node --test script/security_config.node-test.mjs",
+    "verify:security": "./script/verify_security_surface.sh",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "2.11.1",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.11.4",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "14.6.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.3",
+    "jsdom": "29.1.1",
+    "typescript": "7.0.2",
+    "vite": "8.1.4",
+    "vitest": "4.1.10"
+  }
+}

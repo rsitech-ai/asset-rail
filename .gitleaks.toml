@@ -1,0 +1,21 @@
+title = "AssetRail secret scanning"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Generated dependency and build directories"
+paths = [
+  '''(^|/)node_modules/''',
+  '''(^|/)src-tauri/target/''',
+  '''(^|/)dist/''',
+  '''(^|/)coverage/''',
+  '''(^|/)\.git/''',
+]
+
+[[allowlists]]
+description = "Reviewed synthetic credential fingerprint fixture"
+regexTarget = "match"
+regexes = [
+  '''credentialFingerprint:\s*"0123456789abcdef"''',
+]

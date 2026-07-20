@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ConnectorCapabilityEnvelope",
+  "type": "object",
+  "properties": {
+    "connectorId": {
+      "$ref": "#/$defs/ConnectorId"
+    },
+    "credentialSchemes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CredentialSchemeCapability"
+      }
+    },
+    "readCapabilities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ReadCapability"
+      }
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "format": "uint16",
+      "maximum": 65535,
+      "minimum": 0
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "connectorId",
+    "readCapabilities",
+    "credentialSchemes"
+  ],
+  "$defs": {
+    "ConnectorId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+    },
+    "CredentialScheme": {
+      "type": "string",
+      "enum": [
+        "HMAC_SHA256",
+        "RSA",
+        "ED25519"
+      ]
+    },
+    "CredentialSchemeCapability": {
+      "type": "object",
+      "properties": {
+        "scheme": {
+          "$ref": "#/$defs/CredentialScheme"
+        },
+        "state": {
+          "$ref": "#/$defs/SupportState"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "scheme",
+        "state"
+      ]
+    },
+    "ReadCapability": {
+      "type": "string",
+      "enum": [
+        "PERMISSION_POSTURE",
+        "SPOT_BALANCES",
+        "WITHDRAWAL_NETWORKS",
+        "SERVER_TIME",
+        "SYSTEM_STATUS",
+        "WITHDRAWAL_QUOTA",
+        "MARKET_CATALOG",
+        "REFERENCE_PRICES",
+        "SAVED_WITHDRAWAL_ADDRESSES"
+      ]
+    },
+    "SupportState": {
+      "type": "string",
+      "enum": [
+        "SUPPORTED",
+        "UNSUPPORTED"
+      ]
+    }
+  }
+}

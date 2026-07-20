@@ -1,0 +1,53 @@
+name: Bug report
+description: Report a reproducible defect in the offline AssetRail prototype.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include credentials, private wallet addresses, account data, or suspected vulnerabilities. Use SECURITY.md for private reports.
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Provide the AssetRail version or full Git commit.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: macOS version, hardware architecture, Node version, and Rust version.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Use only synthetic fixture data and include exact commands.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+      description: Include minimal redacted logs or screenshots when useful.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed credentials, personal data, private addresses, and other sensitive values.
+          required: true
+        - label: This is not a vulnerability report.
+          required: true

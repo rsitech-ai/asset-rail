@@ -1,0 +1,29 @@
+error[E0432]: unresolved import `assetrail_lib::connectors::binance::BinanceSigner`
+ --> tests/ui/binance_authorization_helpers_are_not_public.rs:1:42
+  |
+1 | use assetrail_lib::connectors::binance::{BinanceSigner, RequestWeight, SignedQuery};
+  |                                          ^^^^^^^^^^^^^ no `BinanceSigner` in `connectors::binance`
+
+error[E0603]: struct `RequestWeight` is private
+ --> tests/ui/binance_authorization_helpers_are_not_public.rs:1:57
+  |
+1 | use assetrail_lib::connectors::binance::{BinanceSigner, RequestWeight, SignedQuery};
+  |                                                         ^^^^^^^^^^^^^ private struct
+  |
+note: the struct `RequestWeight` is defined here
+ --> src/connectors/binance/mod.rs
+  |
+  | use rate_limit::{RefreshPriority, RequestWeight};
+  |                                   ^^^^^^^^^^^^^
+
+error[E0603]: struct `SignedQuery` is private
+ --> tests/ui/binance_authorization_helpers_are_not_public.rs:1:72
+  |
+1 | use assetrail_lib::connectors::binance::{BinanceSigner, RequestWeight, SignedQuery};
+  |                                                                        ^^^^^^^^^^^ private struct
+  |
+note: the struct `SignedQuery` is defined here
+ --> src/connectors/binance/mod.rs
+  |
+  | pub(crate) use signing::SignedQuery;
+  |                ^^^^^^^^^^^^^^^^^^^^

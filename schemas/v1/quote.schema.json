@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QuoteEnvelope",
+  "type": "object",
+  "properties": {
+    "assetRepresentationId": {
+      "$ref": "#/$defs/AssetRepresentationId"
+    },
+    "canonicalChainId": {
+      "$ref": "#/$defs/CanonicalChainId"
+    },
+    "canonicalSnapshotHash": {
+      "type": "string"
+    },
+    "createdAt": {
+      "$ref": "#/$defs/Timestamp"
+    },
+    "destinationId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "exchangeSnapshotId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "expiresAt": {
+      "$ref": "#/$defs/Timestamp"
+    },
+    "feeAmount": {
+      "$ref": "#/$defs/DecimalAmount"
+    },
+    "grossAmount": {
+      "$ref": "#/$defs/DecimalAmount"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "netAmount": {
+      "$ref": "#/$defs/DecimalAmount"
+    },
+    "objective": {
+      "$ref": "#/$defs/QuoteObjective"
+    },
+    "priceEvidenceIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "reasonCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "format": "uint16",
+      "maximum": 65535,
+      "minimum": 0
+    },
+    "sourceAccountId": {
+      "$ref": "#/$defs/SourceAccountId"
+    },
+    "status": {
+      "$ref": "#/$defs/QuoteStatus"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "exchangeSnapshotId",
+    "canonicalSnapshotHash",
+    "sourceAccountId",
+    "destinationId",
+    "canonicalChainId",
+    "assetRepresentationId",
+    "objective",
+    "status",
+    "grossAmount",
+    "feeAmount",
+    "netAmount",
+    "priceEvidenceIds",
+    "reasonCodes",
+    "createdAt",
+    "expiresAt"
+  ],
+  "$defs": {
+    "AssetRepresentationId": {
+      "type": "string",
+      "maxLength": 181,
+      "minLength": 11,
+      "pattern": "^[-a-z0-9]{3,8}:[-_a-zA-Z0-9]{1,32}/[-a-z0-9]{3,8}:[-_.%a-zA-Z0-9]{1,128}$"
+    },
+    "CanonicalChainId": {
+      "type": "string",
+      "maxLength": 41,
+      "minLength": 5,
+      "pattern": "^[-a-z0-9]{3,8}:[-_a-zA-Z0-9]{1,32}$"
+    },
+    "DecimalAmount": {
+      "type": "string",
+      "pattern": "^(?:0|[0-9]+)(?:\\.[0-9]+)?$"
+    },
+    "QuoteObjective": {
+      "type": "string",
+      "enum": [
+        "SAFEST",
+        "CHEAPEST",
+        "FASTEST",
+        "BALANCED",
+        "NATIVE_ONLY"
+      ]
+    },
+    "QuoteStatus": {
+      "type": "string",
+      "enum": [
+        "ELIGIBLE",
+        "INELIGIBLE"
+      ]
+    },
+    "SourceAccountId": {
+      "type": "string",
+      "maxLength": 36,
+      "minLength": 36,
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "Timestamp": {
+      "type": "string",
+      "maxLength": 35,
+      "minLength": 20,
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$"
+    }
+  }
+}
