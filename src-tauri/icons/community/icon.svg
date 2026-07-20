@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title description">
+  <title id="title">Rail Planner Community icon</title>
+  <desc id="description">A violet route fork with three amber destination nodes on a charcoal background.</desc>
+  <rect width="512" height="512" rx="112" fill="#171421"/>
+  <path d="M144 126v112c0 38 31 69 69 69h86c38 0 69 31 69 69v10" fill="none" stroke="#9b8cff" stroke-width="34" stroke-linecap="round"/>
+  <path d="M144 238v148" fill="none" stroke="#9b8cff" stroke-width="34" stroke-linecap="round"/>
+  <circle cx="144" cy="126" r="28" fill="#ffb347"/>
+  <circle cx="144" cy="386" r="28" fill="#ffb347"/>
+  <circle cx="368" cy="386" r="28" fill="#ffb347"/>
+</svg>

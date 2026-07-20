@@ -1,0 +1,371 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExchangeSnapshot",
+  "type": "object",
+  "properties": {
+    "balances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/BalanceRecord"
+      }
+    },
+    "connectorId": {
+      "$ref": "#/$defs/ConnectorId"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "networks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/NetworkMetadataRecord"
+      }
+    },
+    "observedAt": {
+      "$ref": "#/$defs/Timestamp"
+    },
+    "permissions": {
+      "$ref": "#/$defs/PermissionPosture"
+    },
+    "referencePrices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ReferencePriceRecord"
+      }
+    },
+    "savedAddressCandidates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SavedAddressCandidate"
+      }
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "format": "uint16",
+      "maximum": 65535,
+      "minimum": 0
+    },
+    "sourceAccountId": {
+      "$ref": "#/$defs/SourceAccountId"
+    },
+    "systemStatus": {
+      "$ref": "#/$defs/SystemStatus"
+    },
+    "withdrawalQuota": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/WithdrawalQuota"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "connectorId",
+    "sourceAccountId",
+    "observedAt",
+    "permissions",
+    "balances",
+    "networks",
+    "systemStatus",
+    "savedAddressCandidates",
+    "referencePrices"
+  ],
+  "$defs": {
+    "BalanceRecord": {
+      "type": "object",
+      "properties": {
+        "free": {
+          "$ref": "#/$defs/DecimalAmount"
+        },
+        "frozen": {
+          "$ref": "#/$defs/DecimalAmount"
+        },
+        "locked": {
+          "$ref": "#/$defs/DecimalAmount"
+        },
+        "providerAssetCode": {
+          "type": "string"
+        },
+        "withdrawing": {
+          "$ref": "#/$defs/DecimalAmount"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "providerAssetCode",
+        "free",
+        "locked",
+        "frozen",
+        "withdrawing"
+      ]
+    },
+    "ConnectorId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+    },
+    "DecimalAmount": {
+      "type": "string",
+      "pattern": "^(?:0|[0-9]+)(?:\\.[0-9]+)?$"
+    },
+    "MemoRequirement": {
+      "type": "string",
+      "enum": [
+        "FORBIDDEN",
+        "OPTIONAL",
+        "REQUIRED",
+        "UNKNOWN"
+      ]
+    },
+    "NetworkMetadataRecord": {
+      "type": "object",
+      "properties": {
+        "busy": {
+          "type": "boolean"
+        },
+        "contractAddress": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "estimatedArrivalMinutes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint32",
+          "minimum": 0
+        },
+        "fee": {
+          "$ref": "#/$defs/DecimalAmount"
+        },
+        "increment": {
+          "$ref": "#/$defs/DecimalAmount"
+        },
+        "maximum": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DecimalAmount"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "memoRequirement": {
+          "$ref": "#/$defs/MemoRequirement"
+        },
+        "minimum": {
+          "$ref": "#/$defs/DecimalAmount"
+        },
+        "providerAssetCode": {
+          "type": "string"
+        },
+        "providerNetworkCode": {
+          "type": "string"
+        },
+        "withdrawalEnabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "providerAssetCode",
+        "providerNetworkCode",
+        "withdrawalEnabled",
+        "busy",
+        "fee",
+        "minimum",
+        "increment",
+        "memoRequirement"
+      ]
+    },
+    "PermissionPosture": {
+      "type": "object",
+      "properties": {
+        "futures": {
+          "$ref": "#/$defs/PermissionState"
+        },
+        "inspectedAt": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "internalTransfer": {
+          "$ref": "#/$defs/PermissionState"
+        },
+        "ipRestricted": {
+          "type": "boolean"
+        },
+        "margin": {
+          "$ref": "#/$defs/PermissionState"
+        },
+        "reading": {
+          "$ref": "#/$defs/PermissionState"
+        },
+        "trading": {
+          "$ref": "#/$defs/PermissionState"
+        },
+        "unknownPermissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "withdrawal": {
+          "$ref": "#/$defs/PermissionState"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "reading",
+        "withdrawal",
+        "trading",
+        "margin",
+        "futures",
+        "internalTransfer",
+        "ipRestricted",
+        "unknownPermissions",
+        "inspectedAt"
+      ]
+    },
+    "PermissionState": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "ENABLED",
+        "UNKNOWN"
+      ]
+    },
+    "PriceConfidence": {
+      "type": "string",
+      "enum": [
+        "DIRECT_MARKET",
+        "DERIVED",
+        "UNAVAILABLE"
+      ]
+    },
+    "QuoteCurrency": {
+      "type": "string",
+      "enum": [
+        "EUR",
+        "USD",
+        "PLN"
+      ]
+    },
+    "ReferencePriceRecord": {
+      "type": "object",
+      "properties": {
+        "confidence": {
+          "$ref": "#/$defs/PriceConfidence"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "observedAt": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "price": {
+          "$ref": "#/$defs/DecimalAmount"
+        },
+        "providerAssetCode": {
+          "type": "string"
+        },
+        "quoteCurrency": {
+          "$ref": "#/$defs/QuoteCurrency"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "providerAssetCode",
+        "quoteCurrency",
+        "price",
+        "observedAt",
+        "confidence"
+      ]
+    },
+    "SavedAddressCandidate": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "memo": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "providerAssetCode": {
+          "type": "string"
+        },
+        "providerNetworkCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "providerAssetCode",
+        "address"
+      ]
+    },
+    "SourceAccountId": {
+      "type": "string",
+      "maxLength": 36,
+      "minLength": 36,
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "SystemStatus": {
+      "type": "string",
+      "enum": [
+        "NORMAL",
+        "MAINTENANCE",
+        "UNKNOWN"
+      ]
+    },
+    "Timestamp": {
+      "type": "string",
+      "maxLength": 35,
+      "minLength": 20,
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "WithdrawalQuota": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "$ref": "#/$defs/DecimalAmount"
+        },
+        "resetsAt": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Timestamp"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "used": {
+          "$ref": "#/$defs/DecimalAmount"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "used",
+        "limit"
+      ]
+    }
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DestinationProfileEnvelope",
+  "type": "object",
+  "properties": {
+    "assetSupport": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DestinationAssetSupport"
+      }
+    },
+    "canonicalAddress": {
+      "type": "string",
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^\\S+$"
+    },
+    "canonicalChainId": {
+      "$ref": "#/$defs/CanonicalChainId"
+    },
+    "expiresAt": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Timestamp"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "kind": {
+      "$ref": "#/$defs/DestinationKind"
+    },
+    "label": {
+      "type": "string"
+    },
+    "memo": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "format": "uint16",
+      "maximum": 65535,
+      "minimum": 0
+    },
+    "source": {
+      "$ref": "#/$defs/DestinationSource"
+    },
+    "verificationEvidenceHash": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "verificationState": {
+      "$ref": "#/$defs/VerificationState"
+    },
+    "verifiedAt": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Timestamp"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "label",
+    "kind",
+    "source",
+    "canonicalChainId",
+    "canonicalAddress",
+    "verificationState",
+    "assetSupport"
+  ],
+  "$defs": {
+    "AssetRepresentationId": {
+      "type": "string",
+      "maxLength": 181,
+      "minLength": 11,
+      "pattern": "^[-a-z0-9]{3,8}:[-_a-zA-Z0-9]{1,32}/[-a-z0-9]{3,8}:[-_.%a-zA-Z0-9]{1,128}$"
+    },
+    "CanonicalChainId": {
+      "type": "string",
+      "maxLength": 41,
+      "minLength": 5,
+      "pattern": "^[-a-z0-9]{3,8}:[-_a-zA-Z0-9]{1,32}$"
+    },
+    "DestinationAssetSupport": {
+      "type": "object",
+      "properties": {
+        "allowed": {
+          "type": "boolean"
+        },
+        "assetRepresentationId": {
+          "$ref": "#/$defs/AssetRepresentationId"
+        },
+        "verificationState": {
+          "$ref": "#/$defs/VerificationState"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "assetRepresentationId",
+        "allowed",
+        "verificationState"
+      ]
+    },
+    "DestinationKind": {
+      "type": "string",
+      "enum": [
+        "SELF_CUSTODY",
+        "EXCHANGE",
+        "CONTRACT",
+        "UNKNOWN"
+      ]
+    },
+    "DestinationSource": {
+      "type": "string",
+      "enum": [
+        "MANUAL",
+        "WALLET_CONNECTION",
+        "PROVIDER_IMPORT",
+        "DESTINATION_API"
+      ]
+    },
+    "Timestamp": {
+      "type": "string",
+      "maxLength": 35,
+      "minLength": 20,
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "VerificationState": {
+      "type": "string",
+      "enum": [
+        "UNVERIFIED",
+        "STRUCTURALLY_VALID",
+        "USER_CONFIRMED",
+        "OWNERSHIP_VERIFIED",
+        "PROVIDER_CONFIRMED",
+        "EXPIRED",
+        "REJECTED"
+      ]
+    }
+  }
+}

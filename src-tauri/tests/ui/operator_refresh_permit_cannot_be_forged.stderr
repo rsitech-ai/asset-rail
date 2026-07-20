@@ -1,0 +1,5 @@
+error[E0451]: field `_private` of struct `OperatorRefreshPermit` is private
+ --> tests/ui/operator_refresh_permit_cannot_be_forged.rs:4:37
+  |
+4 |     let _ = OperatorRefreshPermit { _private: () };
+  |                                     ^^^^^^^^ private field

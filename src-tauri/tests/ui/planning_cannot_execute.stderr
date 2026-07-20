@@ -1,0 +1,15 @@
+error[E0308]: mismatched types
+  --> tests/ui/planning_cannot_execute.rs:11:23
+   |
+11 |     accepts_execution(&planning);
+   |     ----------------- ^^^^^^^^^ expected `&CredentialHandle<Execution>`, found `&CredentialHandle<Planning>`
+   |     |
+   |     arguments to this function are incorrect
+   |
+   = note: expected reference `&CredentialHandle<assetrail_lib::security::Execution>`
+              found reference `&CredentialHandle<assetrail_lib::security::Planning>`
+note: function defined here
+  --> tests/ui/planning_cannot_execute.rs:3:4
+   |
+ 3 | fn accepts_execution(_: &CredentialHandle<Execution>) {}
+   |    ^^^^^^^^^^^^^^^^^ -------------------------------

@@ -1,0 +1,23 @@
+node_modules/
+dist/
+target/
+src-tauri/target/
+.DS_Store
+*.log
+coverage/
+
+# Local environment and signing material. Commit only reviewed examples/public keys.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p8
+*.p12
+*.mobileprovision
+*.provisionprofile
+Config/*.local.xcconfig
+
+# Local IDE state.
+.vscode/
+.idea/
