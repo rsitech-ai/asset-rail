@@ -102,7 +102,7 @@ test("discloses build origin, source status, and official-versus-community ident
   expect(dialog).toHaveFocus();
   expect(within(dialog).getByText("Local source build")).toBeVisible();
   expect(within(dialog).getByText("Open-source license adopted")).toBeVisible();
-  expect(within(dialog).getByText("MPL-2.0")).toBeVisible();
+  expect(within(dialog).getByText("Apache-2.0")).toBeVisible();
   expect(within(dialog).getByText("unrecorded")).toBeVisible();
   expect(within(dialog).getByText(/Official names, icons, and services are not granted/i)).toBeVisible();
   expect(within(dialog).getByText(/Report vulnerabilities privately through GitHub Security Advisories or info@rsitech.ai/i)).toBeVisible();

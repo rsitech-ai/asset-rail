@@ -4,7 +4,8 @@ AssetRail uses a maintainer-led governance model for the `0.1.x` prototype.
 
 ## Maintainer authority
 
-`@s1korrrr` is the initial maintainer and has final authority for:
+RSI Tech is the public maintainer. `@s1korrrr` is the initial human maintainer
+and has final authority for:
 
 - issue and pull-request triage;
 - merge and release decisions;
