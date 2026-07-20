@@ -7,11 +7,11 @@ describe("createBuildInfo", () => {
       distributionKind: "development",
       distributionLabel: "Local source build",
       productName: "AssetRail",
-      sourceLicenseId: "MPL-2.0",
+      sourceLicenseId: "Apache-2.0",
       sourceLicenseStatus: "Open-source license adopted",
       sourceRevision: "unrecorded",
       sourceUrl: null,
-      version: "0.1.0",
+      version: "0.1.1",
       buildNumber: "development",
     });
   });
@@ -20,7 +20,7 @@ describe("createBuildInfo", () => {
     expect(createBuildInfo({
       VITE_DISTRIBUTION_KIND: "community",
       VITE_PRODUCT_NAME: "Rail Planner Community",
-      VITE_SOURCE_LICENSE_ID: "MPL-2.0",
+      VITE_SOURCE_LICENSE_ID: "Apache-2.0",
       VITE_SOURCE_LICENSE_STATUS: "License adopted",
       VITE_SOURCE_REVISION: "0123456789abcdef0123456789abcdef01234567",
       VITE_SOURCE_URL: "https://example.test/source/0123456789abcdef0123456789abcdef01234567",
@@ -30,7 +30,7 @@ describe("createBuildInfo", () => {
       distributionKind: "community",
       distributionLabel: "Unofficial community build",
       productName: "Rail Planner Community",
-      sourceLicenseId: "MPL-2.0",
+      sourceLicenseId: "Apache-2.0",
       sourceLicenseStatus: "License adopted",
       sourceRevision: "0123456789abcdef0123456789abcdef01234567",
       sourceUrl: "https://example.test/source/0123456789abcdef0123456789abcdef01234567",

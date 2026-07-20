@@ -44,11 +44,11 @@ export function createBuildInfo(environment: BuildEnvironment): BuildInfo {
     distributionKind: kind,
     distributionLabel: distributionLabels[kind],
     productName,
-    sourceLicenseId: environment.VITE_SOURCE_LICENSE_ID ?? "MPL-2.0",
+    sourceLicenseId: environment.VITE_SOURCE_LICENSE_ID ?? "Apache-2.0",
     sourceLicenseStatus: environment.VITE_SOURCE_LICENSE_STATUS ?? "Open-source license adopted",
     sourceRevision,
     sourceUrl,
-    version: environment.VITE_APP_VERSION ?? "0.1.0",
+    version: environment.VITE_APP_VERSION ?? "0.1.1",
     buildNumber: environment.VITE_BUILD_NUMBER ?? "development",
   };
 }

@@ -24,6 +24,11 @@ test("uses a distinct safe community identity by default", () => {
     "icons/community/128x128@2x.png",
     "icons/community/icon.icns",
   ]);
+  assert.equal(config.bundle.resources["../LICENSE"], "LICENSE");
+  assert.equal(
+    config.bundle.resources["target/release-resources/THIRD_PARTY_NOTICES.txt"],
+    "THIRD_PARTY_NOTICES.txt",
+  );
 });
 
 test("rejects official or malformed community identity", () => {
@@ -49,7 +54,8 @@ test("community build plan binds a clean build to an exact source revision", () 
   assert.equal(plan.environment.VITE_PRODUCT_NAME, "Rail Planner Community");
   assert.equal(plan.environment.VITE_SOURCE_REVISION, revision);
   assert.equal(plan.environment.VITE_SOURCE_URL, `https://github.com/rsitech-ai/asset-rail/tree/${revision}`);
-  assert.equal(plan.environment.VITE_SOURCE_LICENSE_ID, "MPL-2.0");
+  assert.equal(plan.environment.VITE_SOURCE_LICENSE_ID, "Apache-2.0");
+  assert.equal(plan.environment.VITE_APP_VERSION, "0.1.1");
   assert.equal(plan.environment.VITE_SOURCE_LICENSE_STATUS, "Open-source license adopted");
   assert.equal(plan.environment.VITE_BUILD_NUMBER, revision.slice(0, 12));
   assert.equal(plan.environment.CARGO_PROFILE_RELEASE_DEBUG, "false");

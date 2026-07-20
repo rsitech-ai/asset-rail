@@ -1,9 +1,9 @@
 [package]
 name = "assetrail"
-version = "0.1.0"
+version = "0.1.1"
 description = "Destination-aware crypto withdrawal planner"
-authors = ["AssetRail"]
-license = "MPL-2.0"
+authors = ["RSI Tech <info@rsitech.ai>"]
+license = "Apache-2.0"
 repository = "https://github.com/rsitech-ai/asset-rail"
 readme = "../README.md"
 edition = "2024"
