@@ -8,8 +8,9 @@ submission, App Store Connect upload, TestFlight, or App Review actions.
 
 - The release source is an immutable reviewed commit on `main` with a clean
   working tree.
-- CI is not used as a gate. Automated security scans are outside this release
-  scope. Required build and behavior checks run locally.
+- GitHub Actions verifies source and secret history on pull requests and
+  `main`. Local release packaging and Apple notarization remain explicit
+  maintainer steps outside CI.
 - The official app uses `ai.rsitech.assetrail`, version `0.1.1`, build `1`, and
   Developer ID Team `2NY8A789TN`.
 - `npm run build:official` signs and verifies locally but deliberately refuses

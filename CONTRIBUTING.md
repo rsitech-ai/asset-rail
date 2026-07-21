@@ -32,8 +32,9 @@ cargo test --manifest-path src-tauri/Cargo.toml --locked --all-targets --all-fea
 cargo clippy --manifest-path src-tauri/Cargo.toml --locked --all-targets --all-features -- -D warnings
 ```
 
-CI is intentionally not configured for this release. Contributors must report
-the local commands they ran and their results in the pull request.
+GitHub Actions verifies source and secret history on pull requests. Contributors
+should still report the local commands they ran and their results in the pull
+request, especially for packaging or Apple signing work that CI does not cover.
 
 ## Change requirements
 

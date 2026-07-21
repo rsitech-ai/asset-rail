@@ -60,6 +60,12 @@ test("repository-local secrets and IDE state stay untracked", async () => {
     "!.env.example",
     ".vscode/",
     ".idea/",
+    ".cursor/",
+    ".codex/",
+    ".agents/",
+    ".claude/",
+    ".superpowers/",
+    "docs/monetization/",
     "*.key",
     "*.pem",
     "*.p8",
@@ -85,16 +91,20 @@ test("build helper validates mode before building and never kills by process nam
   assert.match(runner, /APP_BINARY/);
 });
 
-test("dependency updates and local secret scanning remain enforced while CI is excluded", async () => {
+test("dependency updates, secret scanning, and minimal CI remain enforced", async () => {
   for (const path of [
     ".github/dependabot.yml",
+    ".github/workflows/ci.yml",
     ".gitleaks.toml",
     "script/verify_security_surface.sh",
   ]) {
     assert.equal(await exists(path), true, `missing security automation: ${path}`);
   }
 
-  assert.equal(await exists(".github/workflows/ci.yml"), false, "CI must remain outside this release scope");
+  const workflow = await read(".github/workflows/ci.yml");
+  assert.match(workflow, /gitleaks\/gitleaks-action@/);
+  assert.match(workflow, /npm run test:run/);
+  assert.match(workflow, /cargo test --manifest-path src-tauri\/Cargo\.toml --locked/);
 
   const dependabot = await read(".github/dependabot.yml");
   for (const ecosystem of ["npm", "cargo"]) {
@@ -139,7 +149,7 @@ test("public documentation is licensed, operational, and free of private release
   assert.match(readme, /License: Apache-2\.0/);
   assert.doesNotMatch(readme, /not yet licensed|must not be published/i);
   assert.match(releasing, /Developer ID-signed direct-download release/);
-  assert.match(releasing, /CI is not used as a gate/);
+  assert.match(releasing, /GitHub Actions verifies source and secret history/);
   assert.match(security, /GitHub Private Vulnerability Reporting/);
   assert.match(security, /info@rsitech\.ai/);
   assert.match(contributing, /Developer Certificate of Origin 1\.1/);
@@ -155,8 +165,9 @@ test("public documentation is licensed, operational, and free of private release
   assert.match(maintainers, /RSI Tech/);
   assert.match(maintainers, /https:\/\/rsitech\.ai/);
   assert.match(maintainers, /info@rsitech\.ai/);
-  assert.match(changelog, /## \[0\.1\.1\] - 2026-07-20/);
+  assert.match(changelog, /## \[0\.1\.1\] - 2026-07-21/);
   assert.match(changelog, /Historical `v0\.1\.0` license grants remain unchanged/);
+  assert.match(changelog, /Removed assistant workspace material/);
   assert.equal(manifest.version, "0.1.1");
   assert.equal(manifest.license, "Apache-2.0");
   assert.equal(tauriConfig.version, "0.1.1");

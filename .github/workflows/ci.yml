@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: assetrail-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secrets:
+    name: Scan repository history for secrets
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out complete history
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@dcedce43c6f43de0b836d1fe38946645c9c638dc # v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  verify:
+    name: Verify source
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - name: Check out the reviewed revision
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Install pinned Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24.10.0
+          cache: npm
+
+      - name: Install pinned Rust toolchain
+        uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4
+        with:
+          toolchain: 1.91.0
+          components: clippy,rustfmt
+
+      - name: Select pinned npm
+        run: npm install --global npm@11.6.2
+
+      - name: Install locked JavaScript dependencies
+        run: npm ci
+
+      - name: Verify repository security configuration
+        run: ./script/verify_security_surface.sh
+
+      - name: Run frontend and configuration tests
+        run: |
+          npm run test:run
+          npm run test:config
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Audit JavaScript dependencies
+        run: npm audit --audit-level=high
+
+      - name: Verify Rust formatting
+        run: cargo fmt --manifest-path src-tauri/Cargo.toml --all -- --check
+
+      - name: Test Rust targets and features
+        run: cargo test --manifest-path src-tauri/Cargo.toml --locked --all-targets --all-features
+
+      - name: Lint Rust targets and features
+        run: cargo clippy --manifest-path src-tauri/Cargo.toml --locked --all-targets --all-features -- -D warnings
+
+      - name: Test the release profile
+        run: cargo test --manifest-path src-tauri/Cargo.toml --locked --release --all-features
+
+      - name: Install pinned RustSec client
+        run: cargo install cargo-audit --version 0.22.2 --locked
+
+      - name: Audit Rust dependencies
+        run: cargo audit --file src-tauri/Cargo.lock
