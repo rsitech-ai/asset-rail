@@ -102,9 +102,10 @@ test("dependency updates, secret scanning, and minimal CI remain enforced", asyn
   }
 
   const workflow = await read(".github/workflows/ci.yml");
-  assert.match(workflow, /gitleaks\/gitleaks-action@/);
+  assert.match(workflow, /gitleaks detect --source \./);
   assert.match(workflow, /npm run test:run/);
   assert.match(workflow, /cargo test --manifest-path src-tauri\/Cargo\.toml --locked/);
+  assert.doesNotMatch(workflow, /uses:\s+(?!actions\/)/);
 
   const dependabot = await read(".github/dependabot.yml");
   for (const ecosystem of ["npm", "cargo"]) {
