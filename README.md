@@ -23,8 +23,9 @@ wallet data.
 - License: Apache-2.0 for original source code and project documentation.
 - Maintainer: [RSI Tech](https://rsitech.ai); public and confidential contact
   [info@rsitech.ai](mailto:info@rsitech.ai).
-- Automation: CI is intentionally outside this repository's current release
-  scope. All required checks are documented as local commands.
+- Automation: GitHub Actions runs secret history scans and source verification
+  on pull requests and `main`. Local packaging and notarization remain
+  maintainer steps.
 
 AssetRail does not connect to Binance, OKX, a wallet, or any hosted AssetRail
 service. It cannot place trades, transfer assets, submit withdrawals, persist
@@ -148,9 +149,9 @@ npm audit --audit-level=high
 cargo audit --file src-tauri/Cargo.lock
 ```
 
-`cargo audit` requires the separately installed RustSec client. CI is not a
-substitute for these commands because CI is deliberately not part of this
-release.
+`cargo audit` requires the separately installed RustSec client. Prefer the
+local commands above for release decisions; CI confirms the same source checks
+on every pull request.
 
 ## Architecture
 

@@ -16,8 +16,8 @@ Link the issue, or explain why one is unnecessary.
 
 ## Verification
 
-List the exact local commands run and their results. CI is not configured for
-this release.
+List the exact local commands run and their results. CI verifies source and
+secret history; note any packaging or Apple signing checks that remain local.
 
 ## Impact
 

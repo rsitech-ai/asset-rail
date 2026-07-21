@@ -7,7 +7,7 @@ versioning for source releases while the public interface remains experimental.
 
 No unreleased changes.
 
-## [0.1.1] - 2026-07-20
+## [0.1.1] - 2026-07-21
 
 ### Changed
 
@@ -24,15 +24,17 @@ No unreleased changes.
 - Added clean-commit-bound Cargo and npm runtime dependency notices, with the
   project license, NOTICE, copyright, and trademark terms embedded in release
   bundles.
+- Removed assistant workspace material from the public tree and ignored local
+  IDE, agent, and monetization working notes.
+- Restored a minimal GitHub Actions verification and secret-scan workflow.
 - Historical `v0.1.0` license grants remain unchanged. Its release and tag are
   retained as the accurate record of the first public source release.
 
 ### Limitations
 
-- Official downloadable artifacts are published only after the exact bundle is
-  notarized, stapled, Gatekeeper-validated, and runtime-proven.
-- CI and automated security scans are intentionally outside this release scope;
-  required checks run locally.
+- Official downloadable Apple binaries are published only after the exact bundle
+  is notarized, stapled, Gatekeeper-validated, and runtime-proven.
+- Source archives, SBOMs, and checksums may ship before notarization completes.
 
 ## [0.1.0] - 2026-07-20
 
