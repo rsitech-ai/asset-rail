@@ -52,4 +52,14 @@ if git ls-files | rg '(^|/)\.env($|\.)|\.(pem|key|p8|p12|mobileprovision)$'; the
   exit 1
 fi
 
+if git ls-files | rg '(^|/)\.(codex|cursor|agents|claude|superpowers)(/|$)'; then
+  echo "tracked assistant or local workspace material is present" >&2
+  exit 1
+fi
+
+if git ls-files | rg '(^|/)docs/monetization(/|$)'; then
+  echo "tracked private monetization working notes are present" >&2
+  exit 1
+fi
+
 echo "Security surface verification passed."

@@ -18,6 +18,14 @@ coverage/
 *.provisionprofile
 Config/*.local.xcconfig
 
-# Local IDE state.
+# Local IDE and assistant workspace state.
 .vscode/
 .idea/
+.cursor/
+.codex/
+.agents/
+.claude/
+.superpowers/
+
+# Local-only commercial and monetization working notes.
+docs/monetization/

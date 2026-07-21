@@ -17,6 +17,9 @@
 - Official trademarks, bundle identity, icon, domains, and Apple distribution
   records. The public security and support channels are documented in
   `SECURITY.md` and `SUPPORT.md`.
+- Local assistant and IDE workspaces (`.codex/`, `.cursor/`, `.agents/`,
+  `.claude/`, `.superpowers/`) and commercial working notes under
+  `docs/monetization/`.
 
 ## Runtime proof
 
