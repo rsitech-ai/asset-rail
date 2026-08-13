@@ -69,7 +69,7 @@ export function createCommunityBuildPlan({ environment, revision, dirty }) {
       ].filter(Boolean).join("\u001f"),
       CARGO_PROFILE_RELEASE_DEBUG: "false",
       CARGO_PROFILE_RELEASE_STRIP: "symbols",
-      VITE_APP_VERSION: "0.1.1",
+      VITE_APP_VERSION: "0.1.2",
       VITE_BUILD_NUMBER: revision.slice(0, 12),
       VITE_DISTRIBUTION_KIND: "community",
       VITE_PRODUCT_NAME: identity.productName,

@@ -105,6 +105,8 @@ test("dependency updates, secret scanning, and minimal CI remain enforced", asyn
   assert.match(workflow, /gitleaks detect --source \./);
   assert.match(workflow, /npm run test:run/);
   assert.match(workflow, /cargo test --manifest-path src-tauri\/Cargo\.toml --locked/);
+  assert.match(workflow, /cargo tree --manifest-path src-tauri\/Cargo\.toml --locked --target all -i rkyv@0\.7\.46/);
+  assert.match(workflow, /cargo audit --file src-tauri\/Cargo\.lock --ignore RUSTSEC-2026-0235/);
   assert.doesNotMatch(workflow, /uses:\s+(?!actions\/)/);
 
   const dependabot = await read(".github/dependabot.yml");
@@ -166,13 +168,13 @@ test("public documentation is licensed, operational, and free of private release
   assert.match(maintainers, /RSI Tech/);
   assert.match(maintainers, /https:\/\/rsitech\.ai/);
   assert.match(maintainers, /info@rsitech\.ai/);
-  assert.match(changelog, /## \[0\.1\.1\] - 2026-07-21/);
+  assert.match(changelog, /## \[0\.1\.2\] - 2026-08-13/);
   assert.match(changelog, /Historical `v0\.1\.0` license grants remain unchanged/);
   assert.match(changelog, /Removed assistant workspace material/);
-  assert.equal(manifest.version, "0.1.1");
+  assert.equal(manifest.version, "0.1.2");
   assert.equal(manifest.license, "Apache-2.0");
-  assert.equal(tauriConfig.version, "0.1.1");
-  assert.match(cargoManifest, /^version = "0\.1\.1"$/m);
+  assert.equal(tauriConfig.version, "0.1.2");
+  assert.match(cargoManifest, /^version = "0\.1\.2"$/m);
   assert.match(cargoManifest, /^authors = \["RSI Tech <info@rsitech\.ai>"\]$/m);
   assert.match(cargoManifest, /^license = "Apache-2\.0"$/m);
   assert.match(sbomGenerator, /SBOM_OUTPUT_DIR:-\$ROOT_DIR\/dist\/sbom/);

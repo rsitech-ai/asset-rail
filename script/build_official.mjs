@@ -47,7 +47,7 @@ if (!identities.includes(`\"${expectedOfficialIdentity}\"`)) {
 const tauri = path.join(repositoryRoot, "node_modules", ".bin", "tauri");
 const notices = await generateThirdPartyNotices({ repositoryRoot, revision });
 process.stdout.write(`Generated notices for ${notices.rustPackageCount} Rust and ${notices.npmPackageCount} npm runtime packages\n`);
-process.stdout.write(`Building official AssetRail 0.1.1 (1) from ${revision}\n`);
+process.stdout.write(`Building official AssetRail 0.1.2 (2) from ${revision}\n`);
 const result = spawnSync(tauri, plan.arguments, {
   cwd: repositoryRoot,
   env: plan.environment,
@@ -72,7 +72,7 @@ if (!/flags=.*runtime/.test(signature)) throw new Error("Official bundle is miss
 const identifier = execFileSync("/usr/libexec/PlistBuddy", ["-c", "Print :CFBundleIdentifier", infoPlist], { encoding: "utf8" }).trim();
 const version = execFileSync("/usr/libexec/PlistBuddy", ["-c", "Print :CFBundleShortVersionString", infoPlist], { encoding: "utf8" }).trim();
 const build = execFileSync("/usr/libexec/PlistBuddy", ["-c", "Print :CFBundleVersion", infoPlist], { encoding: "utf8" }).trim();
-if (identifier !== "ai.rsitech.assetrail" || version !== "0.1.1" || build !== "1") {
+if (identifier !== "ai.rsitech.assetrail" || version !== "0.1.2" || build !== "2") {
   throw new Error(`Unexpected bundle metadata: ${identifier} ${version} (${build})`);
 }
 for (const resource of ["COPYRIGHT", "LICENSE", "NOTICE", "TRADEMARKS.md", "THIRD_PARTY_NOTICES.txt", "PrivacyInfo.xcprivacy"]) {
