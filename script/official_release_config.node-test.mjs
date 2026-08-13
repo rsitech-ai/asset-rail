@@ -6,7 +6,7 @@ import {
   findEmbeddedHostPath,
 } from "./official_release_config.mjs";
 
-test("official build plan binds v0.1.1 to an exact clean source revision", () => {
+test("official build plan binds v0.1.2 to an exact clean source revision", () => {
   const revision = "0123456789abcdef0123456789abcdef01234567";
   const plan = createOfficialBuildPlan({
     environment: { HOME: "/Users/tester" },
@@ -17,8 +17,8 @@ test("official build plan binds v0.1.1 to an exact clean source revision", () =>
   assert.equal(plan.identity, expectedOfficialIdentity);
   assert.equal(plan.bundlePath, "src-tauri/target/release/bundle/macos/AssetRail.app");
   assert.equal(plan.environment.APPLE_SIGNING_IDENTITY, expectedOfficialIdentity);
-  assert.equal(plan.environment.VITE_APP_VERSION, "0.1.1");
-  assert.equal(plan.environment.VITE_BUILD_NUMBER, "1");
+  assert.equal(plan.environment.VITE_APP_VERSION, "0.1.2");
+  assert.equal(plan.environment.VITE_BUILD_NUMBER, "2");
   assert.equal(plan.environment.VITE_DISTRIBUTION_KIND, "official");
   assert.equal(plan.environment.VITE_PRODUCT_NAME, "AssetRail");
   assert.equal(plan.environment.VITE_SOURCE_LICENSE_ID, "Apache-2.0");

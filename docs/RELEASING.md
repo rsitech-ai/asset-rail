@@ -1,6 +1,6 @@
 # Releasing AssetRail
 
-This runbook covers the v0.1.1 Developer ID-signed direct-download release. It
+This runbook covers the v0.1.2 Developer ID-signed direct-download release. It
 does not authorize Apple account changes, certificate changes, notarization
 submission, App Store Connect upload, TestFlight, or App Review actions.
 
@@ -11,7 +11,7 @@ submission, App Store Connect upload, TestFlight, or App Review actions.
 - GitHub Actions verifies source and secret history on pull requests and
   `main`. Local release packaging and Apple notarization remain explicit
   maintainer steps outside CI.
-- The official app uses `ai.rsitech.assetrail`, version `0.1.1`, build `1`, and
+- The official app uses `ai.rsitech.assetrail`, version `0.1.2`, build `2`, and
   Developer ID Team `2NY8A789TN`.
 - `npm run build:official` signs and verifies locally but deliberately refuses
   notarization credentials.
@@ -63,12 +63,12 @@ Record the source commit and submission archive digest:
 git rev-parse HEAD
 ditto -c -k --keepParent \
   src-tauri/target/release/bundle/macos/AssetRail.app \
-  dist/AssetRail-0.1.1-notarization.zip
-shasum -a 256 dist/AssetRail-0.1.1-notarization.zip
+  dist/AssetRail-0.1.2-notarization.zip
+shasum -a 256 dist/AssetRail-0.1.2-notarization.zip
 ```
 
 Stop here until the notarization approval names that exact digest, source SHA,
-bundle `ai.rsitech.assetrail`, version `0.1.1` build `1`, Team `2NY8A789TN`, and
+bundle `ai.rsitech.assetrail`, version `0.1.2` build `2`, Team `2NY8A789TN`, and
 the selected Keychain notary profile.
 
 ## Notarize, staple, and package after approval
@@ -90,8 +90,8 @@ Use the pinned and checksum-verified Syft version documented in
 ```
 
 Create `SHA256SUMS` for every uploaded DMG, ZIP, and SBOM. Reject artifacts that
-contain a workstation home path. Publish tag `v0.1.1` and factual release notes
-from `docs/releases/v0.1.1.md`, attach only the validated assets, and verify the
+contain a workstation home path. Publish tag `v0.1.2` and factual release notes
+from `docs/releases/v0.1.2.md`, attach only the validated assets, and verify the
 downloads anonymously.
 
 The v0.1.0 tag/release remains a superseded historical source release because
