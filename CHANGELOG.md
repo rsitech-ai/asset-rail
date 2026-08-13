@@ -7,6 +7,14 @@ versioning for source releases while the public interface remains experimental.
 
 No unreleased changes.
 
+## [0.1.2] - 2026-08-13
+
+### Changed
+
+- Updated the pinned frontend and Rust dependency set to current compatible releases.
+- Refreshed transitive packages to resolve the npm advisories present in 0.1.1.
+- Preserved AssetRail's offline, read-only planning and non-execution safety boundary.
+
 ## [0.1.1] - 2026-07-21
 
 ### Changed
