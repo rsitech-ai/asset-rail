@@ -105,6 +105,8 @@ test("dependency updates, secret scanning, and minimal CI remain enforced", asyn
   assert.match(workflow, /gitleaks detect --source \./);
   assert.match(workflow, /npm run test:run/);
   assert.match(workflow, /cargo test --manifest-path src-tauri\/Cargo\.toml --locked/);
+  assert.match(workflow, /cargo tree --manifest-path src-tauri\/Cargo\.toml --locked --target all -i rkyv@0\.7\.46/);
+  assert.match(workflow, /cargo audit --file src-tauri\/Cargo\.lock --ignore RUSTSEC-2026-0235/);
   assert.doesNotMatch(workflow, /uses:\s+(?!actions\/)/);
 
   const dependabot = await read(".github/dependabot.yml");

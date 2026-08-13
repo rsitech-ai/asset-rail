@@ -13,6 +13,7 @@ No unreleased changes.
 
 - Updated the pinned frontend and Rust dependency set to current compatible releases.
 - Refreshed transitive packages to resolve the npm advisories present in 0.1.1.
+- Made the Rust advisory exception fail closed unless the vulnerable optional `rkyv` crate remains absent from every resolved target graph.
 - Preserved AssetRail's offline, read-only planning and non-execution safety boundary.
 
 ## [0.1.1] - 2026-07-21

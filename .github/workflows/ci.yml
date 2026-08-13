@@ -102,4 +102,11 @@ jobs:
         run: cargo install cargo-audit --version 0.22.2 --locked
 
       - name: Audit Rust dependencies
-        run: cargo audit --file src-tauri/Cargo.lock
+        run: |
+          if cargo tree --manifest-path src-tauri/Cargo.toml --locked --target all -i rkyv@0.7.46 2>/dev/null | grep -q '^rkyv '; then
+            echo 'RUSTSEC-2026-0235 ignore is invalid because rkyv entered the resolved dependency graph' >&2
+            exit 1
+          fi
+          # rust_decimal lists optional rkyv 0.7 metadata, so Cargo.lock records
+          # it even though no AssetRail target or feature resolves that crate.
+          cargo audit --file src-tauri/Cargo.lock --ignore RUSTSEC-2026-0235
