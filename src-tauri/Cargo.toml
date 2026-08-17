@@ -21,7 +21,7 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 tauri-build = { version = "=2.6.3", features = [] }
 
 [dependencies]
-async-trait = "=0.1.89"
+async-trait = "=0.1.92"
 hex = "=0.4.3"
 hmac = "=0.12.1"
 reqwest = { version = "=0.13.4", default-features = false, features = ["json", "query", "rustls"] }
