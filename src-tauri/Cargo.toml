@@ -35,7 +35,7 @@ tauri = { version = "=2.11.5", features = [] }
 thiserror = "=2.0.19"
 time = { version = "=0.3.54", features = ["formatting", "macros", "parsing", "serde"] }
 url = "=2.5.8"
-uuid = { version = "=1.24.0", features = ["serde", "v4"] }
+uuid = { version = "=1.24.1", features = ["serde", "v4"] }
 zeroize = { version = "=1.9.0", features = ["derive"] }
 
 [target.'cfg(target_os = "macos")'.dependencies]
